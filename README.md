@@ -6,11 +6,11 @@ Standard pipeline of using DeepCAT:
 
 Input data is beta CDR3 amino acid sequence filtered out the non-productive and non-amino-acid letters, with the first column being the CDR3 sequences, and optional other columns in the file. It is recommended to document variale gene symbols and clonal frequencies for each CDR3 sequence in the second and third columns. Please see the data/ folder for an example input.
 
-If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, one can use the `PrepareAdaptiveInput.R` function to pre-process the data. Then apply `iSMARTm.py` to perform clustering:
+If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, one can use the `PrepareAdaptiveFile.R` function to pre-process the data. Then apply `iSMARTm.py` to perform clustering:
 
 In R console:
 ```
-source('PrepareAdaptiveInput.R')
+source('PrepareAdaptiveFile.R')
 PrepareAdaptiveInput(InputDataFolder, OutputDataFolder)
 ```
 In Mac or Linux terminal:
