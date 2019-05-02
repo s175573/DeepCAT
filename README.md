@@ -11,7 +11,7 @@ If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotec
 In R console:
 ```
 source('PrepareAdaptiveFile.R')
-PrepareAdaptiveInput(InputDataFolder, OutputDataFolder)
+PrepareAdaptiveFile(InputDataFolder, OutputDataFolder)
 ```
 In Mac or Linux terminal:
 ```
