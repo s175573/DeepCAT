@@ -7,9 +7,9 @@ Standard pipeline of using DeepCAT:
 
 
  1. Clone github repository on your own machine in a desired folder
-<pre>
+&nbsp; &nbsp;
     In Terminal:
-</pre>
+
 ```
   git clone https://github.com/s175573/DeepCAT.git
 ```
