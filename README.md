@@ -54,9 +54,9 @@ where first column contains name of the input file, second column is mean cancer
 
 Let’s make boxplots with cancer score for early-stage breast cancer patients (sample1 and sample2) and healthy donors (sample3 and sample4).
 
-
-![](Figures/Cancer_score.png){ style="display: block; margin: 0 auto" }
-
+<p align="center">
+![](Figures/Cancer_score.png)
+</p>
 
  - If user has raw TCR repertoire sequencing data
 
