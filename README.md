@@ -30,9 +30,11 @@ Standard pipeline of using DeepCAT:
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction
 
+
  - If user doesn't have raw TCR repertoire sequencing data please use the data in a SampleData folder for an example input. 
 This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
 
+&nbsp; &nbsp; &nbsp;&nbsp;
 Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.   
 To process input files just call Script_DeepCAT.sh:
 
@@ -40,6 +42,7 @@ To process input files just call Script_DeepCAT.sh:
   bash  Script_DeepCAT.sh
 ```
 
+&nbsp; &nbsp; &nbsp;&nbsp;
 DeepCAT will output Cancer_score.txt file. 
 
 
@@ -62,28 +65,5 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
  - If user has raw TCR repertoire sequencing data
 
 
-Input data is beta CDR3 amino acid sequence filtered out the non-productive and non-amino-acid letters, with the first column being the CDR3 sequences, and optional other columns in the file. It is recommended to document variale gene symbols and clonal frequencies for each CDR3 sequence in the second and third columns. Please see the data/ folder for an example input.
 
-If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, one can use the `PrepareAdaptiveFile.R` function to pre-process the data. Then apply `iSMARTm.py` to perform clustering:
 
-In R console:
-```
-source('PrepareAdaptiveFile.R')
-PrepareAdaptiveFile(InputDataFolder, OutputDataFolder)
-```
-In Mac or Linux terminal:
-```
-python iSMARTm.py -d OutputDataFolder -o iSMART_results
-```
-
-After running iSMART, use DeepCAT classifiers to perform cancer score prediction:
-
-```
-from DeepCAT import *
-dir_prefix='YOUR_DIR_To_CHKP_Folder/'
-ffs=os.listdir('iSMART_results/')
-ff=ffs[0]
-ff='YOUR_INPUT_FILE_OF_CDR3s.txt'
-_, XX,_=PredictCancer(DIR+ff, dir_prefix=dir_prefix)
-np.mean(XX)  ## cancer score
-```
