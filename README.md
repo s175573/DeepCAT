@@ -31,6 +31,7 @@ Standard pipeline of using DeepCAT:
  4. Now we are ready to run DeepCAT to perform cancer score prediction
 
 - User doesn't have raw TCR repertoire sequencing data.<br />
+
 In this case please use the data in a SampleData folder for an example input. 
 This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
 
