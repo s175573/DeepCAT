@@ -55,8 +55,8 @@ DeepCAT will output Cancer_score.txt file.
   sample4.tsv_ClusteredCDR3s_7.5.txt	0.17117158
 ```
 
-&nbsp; &nbsp; &nbsp;&nbsp;
-where first column contains name of the input file, second column is mean cancer score for all sequences in corresponding input file.
+&nbsp; &nbsp; &nbsp;&nbsp; 
+where first column contains name of the input file, second column is mean cancer score for all sequences in corresponding input file.<br />
 
 &nbsp; &nbsp; &nbsp;&nbsp;
 Let’s make boxplots with cancer score for early-stage breast cancer patients (sample1 and sample2) and healthy donors (sample3 and sample4).
