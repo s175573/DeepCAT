@@ -35,8 +35,7 @@ Standard pipeline of using DeepCAT:
 This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.
-
+Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.<br />
 &nbsp; &nbsp; &nbsp;&nbsp;
 To process input files just call Script_DeepCAT.sh:
 
