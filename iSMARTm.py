@@ -31,16 +31,16 @@ def SplitMotif(seq,m=6,gap=1,strip=True):
     ns=len(seq)
     if ns<=6:
         return []
-    motifList=[seq[xx:(xx+m)] for xx in xrange(0,ns-m+1)]
+    motifList=[seq[xx:(xx+m)] for xx in range(0,ns-m+1)]
     if gap==1:
-        for ii in xrange(1,m):
-            motifList+=[seq[xx:(xx+ii)]+'.'+seq[(xx+ii+1):(xx+m+1)] for xx in xrange(0,ns-m)]
+        for ii in range(1,m):
+            motifList+=[seq[xx:(xx+ii)]+'.'+seq[(xx+ii+1):(xx+m+1)] for xx in range(0,ns-m)]
     return motifList           
 
 def IndexSeqByMotif(seqs,seqIDs,m=6,gap=1):
     Ns=len(seqs)
     seqDict={}
-    for ii in xrange(0,Ns):
+    for ii in range(0,Ns):
         ss=seqs[ii]
         MM=SplitMotif(ss,m=m,gap=gap)
         seqDict[seqIDs[ii]]=MM
@@ -72,10 +72,10 @@ def GenerateMotifGraph(mD,seqs,seqIDs):
         vv=mD[kk]
         LL=mDL[kk]
         nv=len(vv)
-        for ii in xrange(0,nv):
+        for ii in range(0,nv):
             id_1=vv[ii]
             L1=LL[ii]
-            for jj in xrange(ii,nv):
+            for jj in range(ii,nv):
                 if jj==ii:
                     continue
                 id_2=vv[jj]
@@ -108,7 +108,7 @@ def dfs(graph, start):
 
 def IdentifyMotifCluster(SSG):
     ## Input SeqShareGraph dictionary representation of sparse matrix
-    POS=SSG.keys()
+    POS=list(SSG.keys())
     NP=len(POS)
     ClusterList=[]
     tmpL=list(chain(*ClusterList))
@@ -132,7 +132,7 @@ def IdentifyMotifCluster(SSG):
             tmpL=list(chain(*ClusterList))
             count+=1
             if count % 200 ==0:
-                print "    Solved %d clusters" %(count)
+                print("    Solved %d clusters" %(count))
 ##    ClusterList_ss=[]
 ##    for cc in ClusterList:
 ##        CL=[]
@@ -158,7 +158,7 @@ def ParseFa(fname):
     return FaDict
 
 cur_dir=os.path.dirname(os.path.realpath(__file__))+'/'
-print cur_dir
+print(cur_dir)
 
 def PreCalculateVgeneDist(VgeneFa="Imgt_Human_TRBV.fasta"):
     ## Only run one time if needed
@@ -173,14 +173,15 @@ def PreCalculateVgeneDist(VgeneFa="Imgt_Human_TRBV.fasta"):
             VV=kk[1:]
         CDR1Dict[VV]=FaDict[kk][26:37]  ## Imgt CDR1: 27 - 38
         CDR2Dict[VV]=FaDict[kk][55:64]  ## Imgt CDR2: 56 - 65
+    Vkeys=[]    
     Vkeys=CDR1Dict.keys()
     nn=len(Vkeys)
-    for ii in xrange(0,nn):
-        V1=Vkeys[ii]
+    for ii in range(0,nn):
+        V1=list(Vkeys)[ii]
         s1_CDR1=CDR1Dict[V1]
         s1_CDR2=CDR2Dict[V1]
-        for jj in xrange(ii,nn):
-            V2=Vkeys[jj]
+        for jj in range(ii,nn):
+            V2=list(Vkeys)[jj]
             s2_CDR1=CDR1Dict[V2]
             s2_CDR2=CDR2Dict[V2]
             score1=SeqComparison(s1_CDR1,s2_CDR1)
@@ -212,13 +213,13 @@ def InsertGap(Seq,n):
     ns=len(Seq)
     SeqList=[]
     if(n==1):
-        for kk in xrange(0,ns+1):
+        for kk in range(0,ns+1):
             SeqNew=Seq[0:kk]+'-'+Seq[kk:]
             SeqList.append(SeqNew)
     if(n==2):
-        for kk in xrange(0,ns+1):
+        for kk in range(0,ns+1):
             SeqNew=Seq[0:kk]+'-'+Seq[kk:]
-            for jj in xrange(0,ns+2):
+            for jj in range(0,ns+2):
                 SeqNew0=SeqNew[0:jj]+'-'+SeqNew[jj:]
                 SeqList.append(SeqNew0)
     return SeqList
@@ -227,7 +228,7 @@ def SeqComparison(s1,s2,gap=-6):
     n=len(s1)
     CorList=[]
     score=0
-    for kk in xrange(0,n):
+    for kk in range(0,n):
         aa=s1[kk]
         bb=s2[kk]
         if aa in ['.','-','*'] or bb in ['.','-','*']:
@@ -241,7 +242,7 @@ def SeqComparison(s1,s2,gap=-6):
         if KEY not in blosum62:
             KEY=(bb,aa)
         if KEY not in blosum62:
-            print KEY
+            print(KEY)
             raise "Non-standard amino acid coding!"
         score+=blosum62[KEY]
     return score
@@ -251,7 +252,7 @@ def SeqComparison_Di(s1,s2,gap=-6):
     n=len(s1)
     CorList=[]
     score=0
-    for kk in xrange(0,n-1):
+    for kk in range(0,n-1):
         m1=s1[kk:(kk+2)]
         m2=s2[kk:(kk+2)]
         (Cor,PP)=GetCor(m1,m2)
@@ -287,7 +288,7 @@ def SeqComparison_Di(s1,s2,gap=-6):
         if KEY not in blosum62:
             KEY=(bb,aa)
         if KEY not in blosum62:
-            print KEY
+            print(KEY)
             raise "Non-standard amino acid coding!"
         score+=blosum62[KEY]
     aa=s1[n-1]
@@ -306,7 +307,7 @@ def SeqComparison_Di(s1,s2,gap=-6):
             if KEY not in blosum62:
                 KEY=(bb,aa)
             if KEY not in blosum62:
-                print KEY
+                print(KEY)
                 raise "Non-standard amino acid coding!"
             score+=blosum62[KEY]
     return score
@@ -380,7 +381,7 @@ def PWalign(Seqs,Vgene=[],ID=[],VScore={}, gap=-6,gapn=1,UseV=True,cutoff=7,Nthr
     if ns != len(Vgene):
         if len(Vgene)==0:
             Vgene=['']*ns
-            ID=xrange(0,ns)
+            ID=range(0,ns)
         else:
             raise "Incompatible variable gene number!"
     z=sorted(zip(Seqs,Vgene,ID),key=lambda pair:len(pair[0]))
@@ -394,12 +395,12 @@ def PWalign(Seqs,Vgene=[],ID=[],VScore={}, gap=-6,gapn=1,UseV=True,cutoff=7,Nthr
         st=2
     t1=time.time()
     if Nthread==1:
-        for ii in xrange(0,ns):
+        for ii in range(0,ns):
             V1=Vgene[ii]
             if ii % 100 ==0:
                 t2=time.time()
-                print '%d: Time elapsed %f' %(ii, t2-t1)
-            for jj in xrange(ii,ns):
+#                print('%d: Time elapsed %f' %(ii, t2-t1))
+            for jj in range(ii,ns):
                 if ii==jj:
                     continue
                 V2=Vgene[jj]
@@ -429,8 +430,8 @@ def PWalign(Seqs,Vgene=[],ID=[],VScore={}, gap=-6,gapn=1,UseV=True,cutoff=7,Nthr
         # Multi-thread processing
         p=Pool(Nthread)
         XX=[]
-        for ii in xrange(0,ns):
-            for jj in xrange(ii,ns):
+        for ii in range(0,ns):
+            for jj in range(ii,ns):
                 if ii==jj:
                     continue
                 else:
@@ -442,7 +443,7 @@ def PWalign(Seqs,Vgene=[],ID=[],VScore={}, gap=-6,gapn=1,UseV=True,cutoff=7,Nthr
         p.close()
         p.join()
         ## End multiple processing
-        for kk in xrange(0,len(XX)):
+        for kk in range(0,len(XX)):
             score=pl_out[kk]
             if score>=cutoff:
                 PWscore[(XX[kk][0],XX[kk][1])]=1
@@ -450,12 +451,12 @@ def PWalign(Seqs,Vgene=[],ID=[],VScore={}, gap=-6,gapn=1,UseV=True,cutoff=7,Nthr
     return (PWscore,Seqs,Vgene,ID)  
 
 def IdentifyCDR3Clusters(PWscore,cutoff=7):
-    POS=np.array(PWscore.keys())[np.where(np.array(PWscore.values())==1)]
+    POS=np.array(list(PWscore.keys()))[np.where(np.array(list(PWscore.values()))==1)]
     if len(POS)<=0:
-        #print "Too few clustered CDR3s! Please check your repertoire data."
+       # print("Too few clustered CDR3s! Please check your repertoire data.")
         return []
     POS=list(POS)
-    POS=np.array([map(lambda x:x[0],POS),map(lambda x:x[1],POS)])
+    POS=np.array([list(map(lambda x:x[0],POS)),list(map(lambda x:x[1],POS))])
     uniquePos=list(set(list(POS[0])+list(POS[1])))
     ClusterList=[]
     tmpL=list(chain(*ClusterList))
@@ -490,15 +491,15 @@ def CompareClusters(CLinfo1, CLinfo2, VScore,gapn=1, gap=-6, cutoff=7,UseV=True,
     MergedCL=[]
     MergedSeq=[]
     MergedVgene=[]
-    for ii in xrange(0,n1):
+    for ii in range(0,n1):
         #print ii
         seqs1=list(np.array(Seqs1)[CL1[ii]])
         VG1=list(np.array(Vgene1)[CL1[ii]])
-        L1=np.median(map(lambda x:len(x), seqs1))
-        for jj in xrange(0,n2):
+        L1=np.median(list(map(lambda x:len(x), seqs1)))
+        for jj in range(0,n2):
             seqs2=list(np.array(Seqs2)[CL2[jj]])
             VG2=list(np.array(Vgene2)[CL2[jj]])
-            L2=np.median(map(lambda x:len(x), seqs2))
+            L2=np.median(list(map(lambda x:len(x), seqs2)))
             if L2<=L1-1 or L2>=L1+1:
                 continue
             Scores=[]
@@ -541,7 +542,7 @@ def CompareClusters(CLinfo1, CLinfo2, VScore,gapn=1, gap=-6, cutoff=7,UseV=True,
 
 def ObtainCL(InputFile,VScore, gap, gapn, cutoff=7, UseV=True, outDir='./',Nthread=1,Di=False):
     ff=open(InputFile)
-    OutF=outDir+re.sub('.txt','',InputFile.split('/')[-1])
+    OutF=outDir+'/'+re.sub('.txt','',InputFile.split('/')[-1])
     Seqs0=[]
     Vgene0=[]
     ID=[]
@@ -558,11 +559,11 @@ def ObtainCL(InputFile,VScore, gap, gapn, cutoff=7, UseV=True, outDir='./',Nthre
         CDR3Dict[count]=ww[1:]
         ID.append(count)
         count+=1
-    print "Building motif index"
+    print("Building motif index")
     mD=IndexSeqByMotif(Seqs0,ID)
-    print "Generating motif sharing graph"
+    print("Generating motif sharing graph")
     SSG=GenerateMotifGraph(mD,Seqs0,ID)
-    print "Dividing motif sharing graph"
+    print("Dividing motif sharing graph")
     mClusters=IdentifyMotifCluster(SSG)
     g=open(OutF+'_ClusteredCDR3s_'+str(cutoff)+'.txt','w')
     g.write(ALLLines[0].strip()+'\t'+'Group'+'\n')
@@ -577,7 +578,7 @@ def ObtainCL(InputFile,VScore, gap, gapn, cutoff=7, UseV=True, outDir='./',Nthre
         for mm in mID:
             mSeqs.append(Seqs0[mm])
             mVgene.append(Vgene0[mm])
-        print "  Processing %d sequences." %(len(mSeqs))
+#        print("  Processing %d sequences." %(len(mSeqs)))
         TMP=PWalign(mSeqs,mVgene,mID,VScore, gap, gapn, UseV=UseV,cutoff=cutoff,Nthread=Nthread,Di=Di)
         PWscore=TMP[0]
         Seqs=TMP[1]
@@ -621,19 +622,18 @@ def ParseCLFile(CLfile):
 
 def CommandLineParser():
     parser=OptionParser()
-    print '''
+    print('''
 iSMART is a highly specific tools for dividing TCR beta chain repertoire sequencing
 data into antigen-specific groups. Similarity between different repertoires is also
 compared through commonly shared CDR3 groups. iSMART is developed by Li lab at UTSW.
 All rights reserved.
-
 Input columns:
 1. CDR3 amino acid sequence (Starting from C, ending with the first F/L in motif [FL]G.G)
 2. Variable gene name in Imgt format: TRBVXX-XX*XX
 3. Joining gene name (optional)
 4. Frequency (optional)
 5. Other information (optional)
-'''
+''')
     parser.add_option("-d","--directory",dest="Directory",help="Input repertoire sequencing file directory. Please make sure that all the files in the directory are input files.",default="")
     parser.add_option("-f","--file",dest="File",default='',help="Input single file of CDR3 sequences for grouping")
     parser.add_option("-F","--fileList",dest="files",default='',help='Alternative input: a file containing the full path to all the files. If given, overwrite -d and -f option')
@@ -658,8 +658,9 @@ def main():
             files=os.listdir(FileDir)
             files0=[]
             for ff in files:
+                if os.path.splitext(ff)[1] == ".tsv":
                     ff=FileDir+'/'+ff
-                    files0.append(ff)
+                    files0.append(ff)    
             files=files0
     else:
             files=[]
@@ -695,20 +696,20 @@ def main():
     Di=False
     DataDict={}
     if CC:
-        print "Compare input file with reference data"
+        print("Compare input file with reference data")
         RefFiles=os.listdir(RR)
         gg=open(OutDir+"CrossReference.txt",'w')
         gg.write("CDR3\tVgene\tIndividualGroupID\tCrossGroupID\tSampleID\n")
         for f1 in files:
             TMP1=ParseCLFile(ff)
-            print "Processing %s" %(f1)
+            print("Processing %s" %(f1))
             for fr in RefFiles:
                 TMPr=ParseCLFile(RR+fr)
                 sys.stdout.write('.')
                 sys.stdout.flush()
                 MC=CompareClusters(TMP1,TMPr,VScore,Gapn,Gap,cutoff,VV,Di)
                 n=len(MC[0])
-                for kk in xrange(0,n):
+                for kk in range(0,n):
                     gg1=MC[0][kk][0]
                     gg2=MC[0][kk][1]
                     ww1=MC[1][kk][0]
@@ -717,18 +718,18 @@ def main():
                     vv2=MC[2][kk][1]
                     nw1=len(ww1)
                     nw2=len(ww2)
-                    for ss in xrange(0,nw1):
+                    for ss in range(0,nw1):
                         line=ww1[ss]+'\t'+vv1[ss]+'\t'+str(gg1)+'\t'+str(groupID)+'\t'+files[ii]+'\n'
                         gg.write(line)
-                    for ss in xrange(0,nw2):
+                    for ss in range(0,nw2):
                         line=ww2[ss]+'\t'+vv2[ss]+'\t'+str(gg2)+'\t'+str(groupID)+'\t'+files[jj]+'\n'
                         gg.write(line)
                     groupID+=1
-            print ''
+            print('')
         gg.close()
         return 
     for ff in files:
-        print "Processing %s" %(ff)
+        print("Processing %s" %(ff))
         if II:
             TMP=ParseCLFile(ff)
         else:
@@ -741,7 +742,7 @@ def main():
             gg.write(line)
             line='\t'.join(TMP[2])+'\n'
             gg.write(line)
-            for ii in xrange(0,len(PWscore)):
+            for ii in range(0,len(PWscore)):
                 line='\t'.join(map(str,list(PWscore[ii])))+'\n'
                 gg.write(line)
             gg.close()
@@ -781,18 +782,5 @@ def main():
 
 if __name__=='__main__':
     main()
-    print "Total time elapsed: %f" %(time.time()-t0)
-    print "Maximum memory usage: %f MB" %(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1000000)
-
-
-
-
-
-
-
-
-
-
-
-
-
+    print("Total time elapsed: %f" %(time.time()-t0))
+    print("Maximum memory usage: %f MB" %(resource.getrusage(resource.RUSAGE_SELF).ru_maxrss/1000000))

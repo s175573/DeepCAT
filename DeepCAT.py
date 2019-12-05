@@ -1,15 +1,15 @@
 #! usr/bin/python
 ## CNN model for tumor-specific CDR3 sequence prediction
 
-import sys,os,re
+import sys,os,re,csv
 import tensorflow as tf
 import numpy as np
-from Bio.SubsMat.MatrixInfo import blosum62 as b62
-import matplotlib as mpl
-import matplotlib.pyplot as plt
+#import matplotlib as mpl
+#import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score
 #sys.path.insert(0,'/Users/bo/Library/Python/2.7/bin')
 #import skimage
+
 tf.logging.set_verbosity(tf.logging.ERROR)
 AAs=np.array(list('WFGAVILMPYSTNQCKRHDE'))
 curPath=os.getcwd()
@@ -38,7 +38,7 @@ def OneHotEncoding(Seq):
     Seq_aa=list(Seq)
     Ns=len(Seq_aa)
     OHE=np.zeros([20,Ns])
-    for ii in xrange(Ns):
+    for ii in range(Ns):
         aa=Seq_aa[ii]
         vv=np.where(AAs==aa)
         OHE[vv,ii]=1
@@ -48,7 +48,7 @@ def OneHotEncoding(Seq):
 def AAindexEncoding(Seq):
     Ns=len(Seq)
     AAE=np.zeros([Ns, Nf])
-    for kk in xrange(Ns):
+    for kk in range(Ns):
         ss=Seq[kk]
         AAE[kk,]=AAidx_Dict[ss]
     AAE=np.transpose(AAE.astype(np.float32))
@@ -376,7 +376,7 @@ ModelDict={12:cnn_model_CDR3_LL12,
 
 def TrainAndEvaluate(TrainFeature, TrainLabels, EvalFeature, EvalLabels, STEPs=10000, ID='', dir_prefix='/tmp/'):
     ## Train CNN model:
-    for LL in xrange(12,17):
+    for LL in range(12,17):
         CDR3_classifier=tf.estimator.Estimator(model_fn=ModelDict[LL],model_dir=dir_prefix+'/CDR3_classifier_PCA_LL'+str(LL)+'_L2_k2f8d10_'+ID+'/')
         train_input_fn=tf.estimator.inputs.numpy_input_fn(
             x={'x':TrainFeature[LL]['x']},        
@@ -391,69 +391,9 @@ def TrainAndEvaluate(TrainFeature, TrainLabels, EvalFeature, EvalLabels, STEPs=1
             num_epochs=1,
             shuffle=False)
         eval_results=CDR3_classifier.evaluate(input_fn=eval_input_fn)
-        print eval_results
+        print(eval_results)
 
-def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefix=curPath+'/tmp/'):
-    PredictClass={}
-    PredictLabels={}
-    AUCDict={}
-    for LL in xrange(12,17):
-        CDR3_classifier=tf.estimator.Estimator(model_fn=ModelDict[LL],model_dir=dir_prefix+'/CDR3_classifier_PCA_LL'+str(LL)+'_L2_k2f8d10_'+ID+'/')
-        if EvalLabels is None:
-            eval_input_fn=tf.estimator.inputs.numpy_input_fn(
-                x={'x':EvalFeature[LL]['x']},        
-                num_epochs=1,
-                shuffle=False)
-            eval_results=CDR3_classifier.predict(input_fn=eval_input_fn)
-            xx=[]
-            for x in eval_results:
-                xx.append(x['probabilities'][1])
-            AUC=None
-            YY=None
-        else:
-            eval_input_fn=tf.estimator.inputs.numpy_input_fn(
-                x={'x':EvalFeature[LL]['x']},        
-                y=EvalLabels[LL],
-                num_epochs=1,
-                shuffle=False)
-            eval_results=CDR3_classifier.predict(input_fn=eval_input_fn)
-            xx=[]
-            for x in eval_results:
-                xx.append(x['probabilities'][1])
-            YY=EvalLabels[LL]
-            xy=zip(xx,YY)
-            xy.sort()
-            xs=[x for x,y in xy]
-            ys=[y for x,y in xy]
-            AUC=roc_auc_score(ys,xs)
-        PredictClass[LL]=xx
-        AUCDict[LL]=AUC
-        PredictLabels[LL]=YY
-    if makePlot:
-        LLcolors=['b','g','r','c','m']
-        LegendLabels=[]
-        plt.figure(figsize=(7,7))
-        font = {'family' : 'Arial',
-        'weight' : 'normal',
-        'size'   : 22}
-        mpl.rc('font', **font)
-        hhList=[]
-        for LL in xrange(12,17):
-            xx=PredictClass[LL]
-            yy=PredictLabels[LL]
-            ycurve=roc_curve(yy,xx)
-            hh,=plt.plot(ycurve[0],ycurve[1],LLcolors[LL-12],lw=2)
-            hhList.append(hh)
-            LegendLabels.append(str(LL)+' ('+str(np.round(AUCDict[LL],2))+')')
-        plt.plot([0,1],[0,1],ls='dashed',lw=2)
-        plt.xlabel('False Positive Rate',fontsize=22)
-        plt.ylabel('True Positive Rate',fontsize=22)
-        legend=plt.legend(hhList,LegendLabels,fontsize=22,title='Length (AUC)')
-        #plt.show()
-        plt.savefig(dir_prefix+'/ROC-'+ID+'.png',dpi=300)
-    return PredictClass, PredictLabels, AUCDict
-
-def batchTrain(ftumor, fnormal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'/tmp/'):
+def batchTrain(ftumor, fnormal,feval_tumor,feval_normal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'/tmp/'):
     ## rate: cross validation ratio: 0.2 means 80% samples will be used for training
     ## n: number of subsamplings
     tumorCDR3s=[]
@@ -461,7 +401,7 @@ def batchTrain(ftumor, fnormal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'
     for ll in g.readlines():
         rr=ll.strip()
         if not rr.startswith('C') or not rr.endswith('F'):
-            print "Non-standard CDR3s. Skipping."
+            print("Non-standard CDR3s. Skipping.")
             continue
         tumorCDR3s.append(rr)
     normalCDR3s=[]
@@ -469,7 +409,7 @@ def batchTrain(ftumor, fnormal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'
     for ll in g.readlines():
         rr=ll.strip()
         if not rr.startswith('C') or not rr.endswith('F'):
-            print "Non-standard CDR3s. Skipping."
+            print("Non-standard CDR3s. Skipping.")
             continue
         normalCDR3s.append(rr)
     count=0
@@ -483,7 +423,7 @@ def batchTrain(ftumor, fnormal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'
     PredictLabelList=[]
     AUCDictList=[]
     while count<n:
-        print "==============Training cycle %d.=============" %(count)
+        print("==============Training cycle %d.=============" %(count))
         ID=str(count)
         vt_train=np.random.choice(vt_idx,nt_s,replace=False)
         vt_test=[x for x in vt_idx if x not in vt_train]
@@ -532,14 +472,14 @@ def batchTrain(ftumor, fnormal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'
         Eval_Normal=np.array(Eval_Normal)
         EvalFeature, EvalLabels=GetFeatureLabels(Eval_Tumor,Eval_Normal)
         TrainAndEvaluate(TrainFeature, TrainLabels, EvalFeature, EvalLabels,STEPs=STEPs,ID=ID,dir_prefix=dir_prefix)
-        PC,PL,AD=PredictEvaluation(EvalFeature,EvalLabels=EvalLabels,makePlot=True,ID=ID,dir_prefix=dir_prefix)
+        PC,PL,AD=PredictEvaluation(EvalFeature,EvalLabels=EvalLabels,makePlot=False,ID=ID,dir_prefix=dir_prefix)
         PredictClassList.append(PC)
         PredictLabelList.append(PL)
         AUCDictList.append(AD)
         count+=1
     return PredictClassList, PredictLabelList, AUCDictList
 
-def PredictCancer(f,dir_prefix=curPath+'/tmp/'):
+def PredictCancer(f,dir_prefix):
     ## f: input iSMART result file
     ## N: top N most frequent CDR3s will be included in the analysis
     gf=open(f)
@@ -561,7 +501,7 @@ def PredictCancer(f,dir_prefix=curPath+'/tmp/'):
             CDR3sDict[ll].append(ccF)
     ScoreDict={}
     XX=[]
-    for LL in xrange(12,17):
+    for LL in range(12,17):
         CDR3_classifier=tf.estimator.Estimator(model_fn=ModelDict[LL],model_dir=dir_prefix+'/CDR3_classifier_PCA_LL'+str(LL)+'_L2_k2f8d10_tCi01'+'/')
         if LL in CDR3sDict:
             eval_input_fn=tf.estimator.inputs.numpy_input_fn(
@@ -580,7 +520,9 @@ def PredictCancer(f,dir_prefix=curPath+'/tmp/'):
     for kk in ScoreDict:
         mms.append((kk,np.mean(ScoreDict[kk])))
     CancerScore=np.mean(XX)
-    return mms, XX, ScoreDict, CancerScore
+    return CancerScore,XX
+
+#    return mms, XX, ScoreDict, CancerScore
 
 def PredictBatch(DIR, dir_prefix=curPath+'/tmp/'):
     ffs=os.listdir(DIR)
@@ -588,17 +530,25 @@ def PredictBatch(DIR, dir_prefix=curPath+'/tmp/'):
     SDList=[]
     XXList=[]
     for ff in ffs:
-        print ff
         mms, XX, SD=PredictCancer(DIR+ff, dir_prefix=dir_prefix)
         mmsList.append(mms)
         SDList.append(SD)
         XXList.append(XX)
     return ffs, mmsList, SDList, XXList
-        
-
-
     
-    
-        
-
-    
+DIR=sys.argv[1]
+ffs=os.listdir(DIR)
+dir_prefix=sys.argv[2]
+CC=[]
+for ff in ffs:
+  score,XX1 = PredictCancer(DIR+'/'+ff, dir_prefix+'/tmp/')
+  CC.append(score)  
+CC=np.array(CC)
+with open('Cancer_score.txt', 'w') as f:
+    writer = csv.writer(f, delimiter='\t')
+    writer.writerows(zip(ffs,CC))
+#with open('Cancer_score.txt', 'w') as f:
+#  for item in score:
+#    f.write("%s\n" % item)     
+  
+  

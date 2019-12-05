@@ -6,7 +6,7 @@ Standard pipeline of using DeepCAT:
 
 
 
- - Clone github repository on your own machine in a desired folder
+ 1. Clone github repository on your own machine in a desired folder
 
    In Terminal:
 
@@ -14,18 +14,33 @@ Standard pipeline of using DeepCAT:
   git clone https://github.com/s175573/DeepCAT.git
 ```
 
- - Go to DeepCAT folder and unzip DeepCAT_CHKP.zip file with pre-trained model 
+ 2. Go to DeepCAT folder and unzip DeepCAT_CHKP.zip file with pre-trained model 
    
 ```
   cd DeepCAT
   unzip DeepCAT_CHKP.zip 
 ```
 
- - User doesn't have raw TCR repertoire sequencing data  
+ 3. Running of the DeepCAT requires python3, biopython, tensorflow and matplotlib packages to be installed. If they are not installed on your machine, please run the command:
+ 
+```
+  pip install python3 biopython tensorflow matplotlib 
+```
+
+ 4. Now we are ready to run DeepCAT to perform cancer score prediction
+
+ - If user doesn't have raw TCR repertoire sequencing data. Please use the data in a SampleData folder for an example input. This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
+Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.   
+To process input files just call Script_DeepCAT.sh:
+
+```
+  bash  Script_DeepCAT.sh
+```
 
 
 
- - User has raw TCR repertoire sequencing data
+
+ - If user has raw TCR repertoire sequencing data
 
 
 Input data is beta CDR3 amino acid sequence filtered out the non-productive and non-amino-acid letters, with the first column being the CDR3 sequences, and optional other columns in the file. It is recommended to document variale gene symbols and clonal frequencies for each CDR3 sequence in the second and third columns. Please see the data/ folder for an example input.
