@@ -8,12 +8,18 @@ Standard pipeline of using DeepCAT:
 
  - Clone github repository on your own machine in a desired folder
 
-In Terminal:
+   In Terminal:
 
 ```
   git clone https://github.com/s175573/DeepCAT.git
 ```
 
+ - Go to DeepCAT folder and unzip DeepCAT_CHKP.zip file with pre-trained model 
+   
+```
+  cd DeepCAT
+  unzip DeepCAT_CHKP.zip 
+```
 
  - User doesn't have raw TCR repertoire sequencing data  
 
