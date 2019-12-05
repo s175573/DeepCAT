@@ -31,7 +31,7 @@ Standard pipeline of using DeepCAT:
  4. Now we are ready to run DeepCAT to perform cancer score prediction
 
 
- #A User doesn't have raw TCR repertoire sequencing data.<br />
+#A User doesn't have raw TCR repertoire sequencing data.<br />
 &nbsp; &nbsp; &nbsp;&nbsp;
 Please use the data in a SampleData folder for an example input. 
 This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
@@ -67,7 +67,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
   <img src="Figures/Cancer_score.png">
 </p>
 
- #B User has raw TCR repertoire sequencing data.
+#B User has raw TCR repertoire sequencing data.
 
 
 
