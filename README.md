@@ -4,6 +4,24 @@ Deep Learning Method to Identify Cancer Associated TCRs
 DeepCAT is a computational method based on convolutional neural network to exclusively identify cancer-associated beta chain TCR hypervariable CDR3 sequences. The input data were generated from tumor RNA-seq data and TCR repertoire sequencing data of healthy donors. Users do not need to perform training or evaluation. Instead, users can directly apply the PredictCancer function in the package, after downloading the CHKP folder. 
 Standard pipeline of using DeepCAT:
 
+
+
+ - Clone github repository on your own machine in a desired folder
+
+In Terminal:
+
+```
+  git clone https://github.com/s175573/DeepCAT.git
+```
+
+
+ - User doesn't have raw TCR repertoire sequencing data  
+
+
+
+ - User has raw TCR repertoire sequencing data
+
+
 Input data is beta CDR3 amino acid sequence filtered out the non-productive and non-amino-acid letters, with the first column being the CDR3 sequences, and optional other columns in the file. It is recommended to document variale gene symbols and clonal frequencies for each CDR3 sequence in the second and third columns. Please see the data/ folder for an example input.
 
 If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, one can use the `PrepareAdaptiveFile.R` function to pre-process the data. Then apply `iSMARTm.py` to perform clustering:
