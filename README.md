@@ -21,7 +21,7 @@ Standard pipeline of using DeepCAT:
   unzip DeepCAT_CHKP.zip 
 ```
 
- 3. Running of the DeepCAT requires python3, biopython, tensorflow and matplotlib packages to be installed. If they are not installed on your machine, please run the command:
+ 3. Running the DeepCAT requires python3, biopython, tensorflow and matplotlib packages to be installed. If they are not installed on your machine, please run the command:
  
 ```
   pip install python3 biopython tensorflow matplotlib 
@@ -38,7 +38,18 @@ To process input files just call Script_DeepCAT.sh:
   bash  Script_DeepCAT.sh
 ```
 
-DeepCAT will output Cancer_score.txt file, which contains two columns. The first column contains name of the input file and the second one includes mean cancer score for all sequences in a given input file.
+DeepCAT will output Cancer_score.txt file. 
+
+
+```
+  $ cat Cancer_score.txt
+  sample1.tsv_ClusteredCDR3s_7.5.txt	0.31860474
+  sample2.tsv_ClusteredCDR3s_7.5.txt	0.22043602
+  sample3.tsv_ClusteredCDR3s_7.5.txt	0.17322193
+  sample4.tsv_ClusteredCDR3s_7.5.txt	0.17117158
+```
+
+where first column contains name of the input file, second column is mean cancer score for all sequences in corresponding input file.
 
 
 
