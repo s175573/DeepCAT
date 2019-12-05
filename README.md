@@ -29,13 +29,16 @@ Standard pipeline of using DeepCAT:
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction
 
- - If user doesn't have raw TCR repertoire sequencing data. Please use the data in a SampleData folder for an example input. This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
+ - If user doesn't have raw TCR repertoire sequencing data please use the data in a SampleData folder for an example input. 
+This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
 Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.   
 To process input files just call Script_DeepCAT.sh:
 
 ```
   bash  Script_DeepCAT.sh
 ```
+
+DeepCAT will output Cancer_score.txt file, which contains two columns. The first column contains name of the input file and the second one includes mean cancer score for all sequences in a given input file.
 
 
 
