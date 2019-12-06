@@ -30,9 +30,9 @@ Standard pipeline of using DeepCAT:
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction
  
-<div class="text-purple">
+<span style="color:blue">
 4A. User doesn't have raw TCR repertoire sequencing data.
-</div>
+</span>
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
