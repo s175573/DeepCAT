@@ -44,7 +44,7 @@ Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy
 To process input files just call Script_DeepCAT.sh:
 
 ```
-  bash  Script_DeepCAT.sh
+  bash  Script_DeepCAT.sh -p
 ```
 
 &nbsp; &nbsp; &nbsp;&nbsp;
@@ -74,11 +74,11 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, please create an Input folder in a DeepCAT directory and place your input “tsv” file/s there. The DeepCAT directory contains example of raw input file, Example_raw_file.tsv.
+If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, please create a folder (your_folder_name) in a DeepCAT directory and place your input “tsv” file/s there. The DeepCAT directory contains example of raw input file, Example_raw_file.tsv.
 
 ```
-  mkdir Input
-  bash  Script_DeepCAT.sh
+  mkdir your_folder_name
+  bash  Script_DeepCAT.sh -r your_folder_name
 ```
 
 &nbsp; &nbsp; &nbsp;&nbsp;
