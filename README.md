@@ -32,6 +32,7 @@ Standard pipeline of using DeepCAT:
 
 - User doesn't have raw TCR repertoire sequencing data.
 
+
 &nbsp; &nbsp; &nbsp;&nbsp;
 In this case please use the data in a SampleData folder for an example input. 
 This folder contains 4 files, all profiled by Adaptive Biotechnology and can be downloaded from immuneAccess (https://clients.adaptivebiotech.com/immuneaccess).
