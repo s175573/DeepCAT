@@ -30,7 +30,7 @@ Standard pipeline of using DeepCAT:
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction
 
- 4A. **User doesn't have raw TCR repertoire sequencing data.**
+ **4A. User doesn't have raw TCR repertoire sequencing data.**
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
@@ -67,7 +67,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
   <img src="Figures/Cancer_score.png">
 </p>
 
- 4B. **User has raw TCR repertoire sequencing data.**
+ **4B. User has raw TCR repertoire sequencing data.**
 
 &nbsp; &nbsp; &nbsp;&nbsp;
 Please create an Input folder in a DeepCAT directory and place your input “cvs” file/s there. An example of input files format may be find in SampleData directory.
