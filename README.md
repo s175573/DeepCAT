@@ -28,8 +28,7 @@ Standard pipeline of using DeepCAT:
   pip install python3 biopython tensorflow matplotlib 
 ```
 
- 4. Now we are ready to run DeepCAT to perform cancer score prediction
- 
+ 4. Now we are ready to run DeepCAT to perform cancer score prediction <br />
 <span style="color:blue">
 4A. User doesn't have raw TCR repertoire sequencing data.
 </span>
