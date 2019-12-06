@@ -67,6 +67,16 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 
 - User has raw TCR repertoire sequencing data.
 
+&nbsp; &nbsp; &nbsp;&nbsp;
+Please create an Input folder in a DeepCAT directory and place your input “cvs” file/s there. An example of input files format may be find in SampleData directory.
+
+```
+  mkdir Input
+  bash  Script_DeepCAT.sh
+```
+
+&nbsp; &nbsp; &nbsp;&nbsp;
+After running Script_DeepCAT.sh an output file Cancer_score.txt will be created, which contains name of the input file and corresponding cancer score. 
 
 
 
