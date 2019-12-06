@@ -68,7 +68,9 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
   <img src="Figures/Cancer_score.png">
 </p>
 
- **4B. User has raw TCR repertoire sequencing data.**
+<span style="color:blue">
+B. User has raw TCR repertoire sequencing data.**
+</span>
 
 &nbsp; &nbsp; &nbsp;&nbsp;
 Please create an Input folder in a DeepCAT directory and place your input “cvs” file/s there. An example of input files format may be find in SampleData directory.
