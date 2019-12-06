@@ -69,7 +69,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 </p>
 
 
-<font color='red'>4B. User has raw TCR repertoire sequencing data.</font>
+{: .blue}4B. User has raw TCR repertoire sequencing data.
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
