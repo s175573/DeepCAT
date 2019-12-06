@@ -74,7 +74,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-Please create an Input folder in a DeepCAT directory and place your input “cvs” file/s there. An example of input files format may be find in SampleData directory.
+If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, please create an Input folder in a DeepCAT directory and place your input “tsv” file/s there. The DeepCAT directory contains example of raw input file, Example_raw_file.tsv.
 
 ```
   mkdir Input
