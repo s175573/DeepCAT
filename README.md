@@ -31,7 +31,7 @@ Standard pipeline of using DeepCAT:
  4. Now we are ready to run DeepCAT to perform cancer score prediction  
 
 
-***4A. User doesn't have raw TCR repertoire sequencing data.***
+***&nbsp; &nbsp; 4A. User doesn't have raw TCR repertoire sequencing data.***
  
 
 
