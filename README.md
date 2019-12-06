@@ -29,9 +29,9 @@ Standard pipeline of using DeepCAT:
 ```
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction <br />
-<span style="color:blue">
-4A. User doesn't have raw TCR repertoire sequencing data.
-</span>
+
+  ##4A. User doesn't have raw TCR repertoire sequencing data.
+ 
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
@@ -69,7 +69,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 </p>
 
 
-{: .blue}4B. User has raw TCR repertoire sequencing data.
+## 4B. User has raw TCR repertoire sequencing data.
 
 
 &nbsp; &nbsp; &nbsp;&nbsp;
