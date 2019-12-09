@@ -44,7 +44,7 @@ Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy
 To process input files just call Script_DeepCAT.sh:
 
 ```
-  bash  Script_DeepCAT.sh -p
+  bash  Script_DeepCAT.sh -t SampleData
 ```
 
 &nbsp; &nbsp; &nbsp;&nbsp;

@@ -20,12 +20,11 @@ if [ ${args[0]} == '-r' ]; then
      echo "Error! The" ${args[1]} "directory is empty"
      exit 1
   fi   
-elif [ ${args[0]} == '-p' ]; then
-    echo "The files in SampleData will be processed"
-    var1="SampleData"
+elif [ ${args[0]} == '-t' ]; then
+    echo "The files in ${args[1]} will be processed"
     if [ ! -d $var2 ]; then
       mkdir $var2
     fi
-    python iSMARTm.py -d $var1 -o $var2
+    python iSMARTm.py -d ${args[1]} -o $var2
 fi  
 python DeepCAT_modif.py $var2  $var3
