@@ -1,4 +1,4 @@
-# DeepCAT<img  align="left" src="https://github.com/s175573/DeepCAT/blob/master/Figures/Cat.png" width="25" height="45" > 
+# DeepCAT<img  align="left" src="https://github.com/s175573/DeepCAT/blob/master/Figures/Cat.png" width="35" height="45" > 
 
 Deep Learning Method to Identify Cancer Associated TCRs
 
