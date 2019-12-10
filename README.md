@@ -1,4 +1,4 @@
-![](<img src="Figures/Cat.png" =100x100) # DeepCAT
+<img src="Figures/Cat.png" width=“100” height=“100”> # DeepCAT
 
 Deep Learning Method to Identify Cancer Associated TCRs
 
