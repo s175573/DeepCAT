@@ -27,4 +27,4 @@ elif [ ${args[0]} == '-t' ]; then
     fi
     python iSMARTm.py -d ${args[1]} -o $var2
 fi  
-python DeepCAT_modif.py $var2  $var3
+python DeepCAT.py $var2  $var3
