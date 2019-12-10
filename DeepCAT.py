@@ -4,8 +4,8 @@
 import sys,os,re,csv
 import tensorflow as tf
 import numpy as np
-#import matplotlib as mpl
-#import matplotlib.pyplot as plt
+import matplotlib as mpl
+import matplotlib.pyplot as plt
 from sklearn.metrics import roc_curve, roc_auc_score
 #sys.path.insert(0,'/Users/bo/Library/Python/2.7/bin')
 #import skimage
@@ -392,6 +392,66 @@ def TrainAndEvaluate(TrainFeature, TrainLabels, EvalFeature, EvalLabels, STEPs=1
             shuffle=False)
         eval_results=CDR3_classifier.evaluate(input_fn=eval_input_fn)
         print(eval_results)
+        
+def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefix=curPath+'/tmp/'):
+    PredictClass={}
+    PredictLabels={}
+    AUCDict={}
+    for LL in xrange(12,17):
+        CDR3_classifier=tf.estimator.Estimator(model_fn=ModelDict[LL],model_dir=dir_prefix+'/CDR3_classifier_PCA_LL'+str(LL)+'_L2_k2f8d10_'+ID+'/')
+        if EvalLabels is None:
+            eval_input_fn=tf.estimator.inputs.numpy_input_fn(
+                x={'x':EvalFeature[LL]['x']},        
+                num_epochs=1,
+                shuffle=False)
+            eval_results=CDR3_classifier.predict(input_fn=eval_input_fn)
+            xx=[]
+            for x in eval_results:
+                xx.append(x['probabilities'][1])
+            AUC=None
+            YY=None
+        else:
+            eval_input_fn=tf.estimator.inputs.numpy_input_fn(
+                x={'x':EvalFeature[LL]['x']},        
+                y=EvalLabels[LL],
+                num_epochs=1,
+                shuffle=False)
+            eval_results=CDR3_classifier.predict(input_fn=eval_input_fn)
+            xx=[]
+            for x in eval_results:
+                xx.append(x['probabilities'][1])
+            YY=EvalLabels[LL]
+            xy=zip(xx,YY)
+            xy.sort()
+            xs=[x for x,y in xy]
+            ys=[y for x,y in xy]
+            AUC=roc_auc_score(ys,xs)
+        PredictClass[LL]=xx
+        AUCDict[LL]=AUC
+        PredictLabels[LL]=YY
+    if makePlot:
+        LLcolors=['b','g','r','c','m']
+        LegendLabels=[]
+        plt.figure(figsize=(7,7))
+        font = {'family' : 'Arial',
+        'weight' : 'normal',
+        'size'   : 22}
+        mpl.rc('font', **font)
+        hhList=[]
+        for LL in xrange(12,17):
+            xx=PredictClass[LL]
+            yy=PredictLabels[LL]
+            ycurve=roc_curve(yy,xx)
+            hh,=plt.plot(ycurve[0],ycurve[1],LLcolors[LL-12],lw=2)
+            hhList.append(hh)
+            LegendLabels.append(str(LL)+' ('+str(np.round(AUCDict[LL],2))+')')
+        plt.plot([0,1],[0,1],ls='dashed',lw=2)
+        plt.xlabel('False Positive Rate',fontsize=22)
+        plt.ylabel('True Positive Rate',fontsize=22)
+        legend=plt.legend(hhList,LegendLabels,fontsize=22,title='Length (AUC)')
+        #plt.show()
+        plt.savefig(dir_prefix+'/ROC-'+ID+'.png',dpi=300)
+    return PredictClass, PredictLabels, AUCDict
 
 def batchTrain(ftumor, fnormal,feval_tumor,feval_normal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'/tmp/'):
     ## rate: cross validation ratio: 0.2 means 80% samples will be used for training

@@ -1,4 +1,5 @@
-# DeepCAT
+<img src="Figures/Cat.tif”> # DeepCAT
+
 Deep Learning Method to Identify Cancer Associated TCRs
 
 DeepCAT is a computational method based on convolutional neural network to exclusively identify cancer-associated beta chain TCR hypervariable CDR3 sequences. The input data were generated from tumor RNA-seq data and TCR repertoire sequencing data of healthy donors. Users do not need to perform training or evaluation. Instead, users can directly apply the PredictCancer function in the package, after downloading the CHKP folder. 
