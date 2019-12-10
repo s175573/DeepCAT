@@ -88,7 +88,7 @@ After running Script_DeepCAT.sh an output file Cancer_score.txt will be created,
 ### Training of DeepCAT models
 
 To train DeepCAT from scratch, please use our example data in TrainingData folder. This folder contains two files, each is a list of CDR3s coming from either cancer or healthy individuals.
-Run the following command in Terminal:
+To train DeepCAT, run the following command in Terminal:
 
 ```python
 python
