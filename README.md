@@ -84,8 +84,5 @@ If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotec
 &nbsp; &nbsp; &nbsp;&nbsp;
 After running Script_DeepCAT.sh an output file Cancer_score.txt will be created, which contains name of the input file and corresponding cancer score. 
 
-<p align="center">
+## Training of DeepCAT models
 
-# Training of DeepCAT models
-
-</p>
