@@ -1,4 +1,4 @@
-<img src="Figures/Cat.tif”> # DeepCAT
+<p><img src="Figures/Cat.tif”></p> # DeepCAT
 
 Deep Learning Method to Identify Cancer Associated TCRs
 
