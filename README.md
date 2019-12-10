@@ -89,12 +89,11 @@ After running Script_DeepCAT.sh an output file Cancer_score.txt will be created,
 
 To train DeepCAT from scratch, please use our example data in TrainingData folder. The training data contains two files, each is a list of CDR3s coming from either cancer or healthy individuals.
 Run the following command in Terminal:
-```bash
-python
-```
+
 ```python
-from DeepCAT import *
-batchTrain(ftumor='TumorCDR3.txt',n=10, STEPs=20000, rate=0.33, fnormal='NormalCDR3.txt')
+python
+>>> from DeepCAT import *
+>>> batchTrain(ftumor='TumorCDR3.txt',n=10, STEPs=20000, rate=0.33, fnormal='NormalCDR3.txt')
 ```
 This function performs n (=10 here) times 3-fold cross-validation by subsampling 1-rate (67%) of the data for training, and the remaining 33% for validation. The number of training steps in each run is equal 20000.
 
