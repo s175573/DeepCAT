@@ -1,9 +1,10 @@
 # DeepCAT<img  align="left" src="https://github.com/s175573/DeepCAT/blob/master/Figures/Cat.png" width="35" height="45" > 
 
-Deep Learning Method to Identify Cancer Associated TCRs
+### Deep CNN Model for Cancer Associated TCRs
 
 DeepCAT is a computational method based on convolutional neural network to exclusively identify cancer-associated beta chain TCR hypervariable CDR3 sequences. The input data were generated from tumor RNA-seq data and TCR repertoire sequencing data of healthy donors. Users do not need to perform training or evaluation. Instead, users can directly apply the PredictCancer function in the package, after downloading the CHKP folder. 
-Standard pipeline of using DeepCAT:
+
+### Standard pipeline of using DeepCAT
 
 
 
@@ -88,7 +89,7 @@ After running Script_DeepCAT.sh an output file Cancer_score.txt will be created,
 ### Training of DeepCAT models
 
 To train DeepCAT from scratch, please use our example data in TrainingData folder. This folder contains two files, each is a list of CDR3s coming from either cancer or healthy individuals.
-To train DeepCAT, run the following command:
+Run the following command in Terminal:
 
 ```python
 python
