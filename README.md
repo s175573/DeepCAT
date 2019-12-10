@@ -11,13 +11,13 @@ Standard pipeline of using DeepCAT:
 &nbsp; &nbsp; &nbsp;&nbsp;
     In Terminal:
 
-```bash
+```js
   git clone https://github.com/s175573/DeepCAT.git
 ```
 
  2. Go to DeepCAT folder and unzip DeepCAT_CHKP.zip file with pre-trained model 
    
-```bash
+```js
   cd DeepCAT
   unzip DeepCAT_CHKP.zip 
 ```
@@ -43,7 +43,7 @@ This folder contains 4 files, all profiled by Adaptive Biotechnology and can be 
 Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy donors.<br />
 To process input files just call Script_DeepCAT.sh:
 
-```bash
+```js
   bash  Script_DeepCAT.sh -t SampleData
 ```
 
@@ -51,7 +51,7 @@ To process input files just call Script_DeepCAT.sh:
 DeepCAT will output Cancer_score.txt file. 
 
 
-```bash
+```js
   $ cat Cancer_score.txt
   sample1.tsv_ClusteredCDR3s_7.5.txt	0.31860474
   sample2.tsv_ClusteredCDR3s_7.5.txt	0.22043602
@@ -76,7 +76,7 @@ Let’s make boxplots with cancer score for early-stage breast cancer patients (
 &nbsp; &nbsp; &nbsp;&nbsp;
 If starting from raw TCR repertoire sequencing data produced from AdaptiveBiotech immuneAnalyzer, please create a folder (your_folder_name) in a DeepCAT directory and place your input “tsv” file/s there. The DeepCAT directory contains example of raw input file, Example_raw_file.tsv.
 
-```bash
+```js
   mkdir your_folder_name
   bash  Script_DeepCAT.sh -r your_folder_name
 ```
