@@ -596,19 +596,18 @@ def PredictBatch(DIR, dir_prefix=curPath+'/tmp/'):
         XXList.append(XX)
     return ffs, mmsList, SDList, XXList
     
-DIR=sys.argv[1]
-ffs=os.listdir(DIR)
-dir_prefix=sys.argv[2]
-CC=[]
-for ff in ffs:
-  score,XX1 = PredictCancer(DIR+'/'+ff, dir_prefix+'/tmp/')
-  CC.append(score)  
-CC=np.array(CC)
-with open('Cancer_score.txt', 'w') as f:
+if len(sys.argv) > 1:
+ print(sys.argv)    
+ DIR=sys.argv[1]
+ ffs=os.listdir(DIR)
+ dir_prefix=sys.argv[2]
+ CC=[]
+ for ff in ffs:
+   score,XX1 = PredictCancer(DIR+'/'+ff, dir_prefix+'/tmp/')
+   CC.append(score)  
+ CC=np.array(CC)
+ with open('Cancer_score.txt', 'w') as f:
     writer = csv.writer(f, delimiter='\t')
-    writer.writerows(zip(ffs,CC))
-#with open('Cancer_score.txt', 'w') as f:
-#  for item in score:
-#    f.write("%s\n" % item)     
+    writer.writerows(zip(ffs,CC))    
   
   
