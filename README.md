@@ -89,7 +89,7 @@ After running Script_DeepCAT.sh an output file Cancer_score.txt will be created,
 To date, cancer score estimation is the average of DeepCAT output probabilities, and is intended to evaluate only for unsorted PBMC samples from healthy individuals or untreated cancer patients. _Application of cancer scores on flow-sorted T cells, TCR-seq data profiled using a different platform, patient samples with poor quality (low total template counts), or patients with chronic inflammatory conditions may lead to undesirable results._ These results or observations cannot be compared to the data generated in the DeepCAT publication (currently in submission). 
 
 
-### Training of DeepCAT models
+### Training DeepCAT models
 
 To train DeepCAT from scratch, please use our example data in TrainingData folder. This folder contains two files, each is a list of CDR3s coming from either cancer or healthy individuals.
 Run the following command in Terminal:
