@@ -23,5 +23,4 @@ if [ ${args[0]} == '-r' ]; then
 elif [ ${args[0]} == '-t' ]; then
     var2=${args[1]}
 fi  
-python DeepCAT.py $var2  $var3
-
+python DeepCAT.py $var2 $var3 ${args[0]}

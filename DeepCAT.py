@@ -602,12 +602,23 @@ if len(sys.argv) > 1:
  ffs=os.listdir(DIR)
  dir_prefix=sys.argv[2]
  CC=[]
+ ffss=[]
  for ff in ffs:
-   score,XX1 = PredictCancer(DIR+'/'+ff, dir_prefix+'/tmp/')
-   CC.append(score)  
+   if ff == 'README.md':
+     continue
+   else: 
+     score,XX1 = PredictCancer(DIR+'/'+ff, dir_prefix+'/tmp/')
+     CC.append(score)
+     ffss.append(ff)  
  CC=np.array(CC)
- with open('Cancer_score'+DIR1+'.txt', 'w') as f:
-    writer = csv.writer(f, delimiter='\t')
-    writer.writerows(zip(ffs,CC))    
+ ffss=np.array(ffss)
+ if sys.argv[3] == '-t':
+   with open('Cancer_score_'+DIR1+'.txt', 'w') as f:
+      writer = csv.writer(f, delimiter='\t')
+      writer.writerows(zip(ffss,CC))  
+ elif sys.argv[3] == '-r':       
+   with open('Cancer_score.txt', 'w') as f:
+      writer = csv.writer(f, delimiter='\t')
+      writer.writerows(zip(ffss,CC))  
   
   

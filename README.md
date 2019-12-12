@@ -46,11 +46,12 @@ Files 1 and 2 come from early-stage breast cancer patients; 3 and 4 from healthy
 To process input files just call Script_DeepCAT.sh:
 
 ```bash
-  bash  Script_DeepCAT.sh -t SampleData
+  bash  Script_DeepCAT.sh -t SampleData/Control
+  bash  Script_DeepCAT.sh -t SampleData/Cancer
 ```
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-DeepCAT will output Cancer_score.txt file. 
+DeepCAT will output two files, Cancer_score_Control.txt and Cancer_score_Cancer.txt. 
 
 
 ```bash
