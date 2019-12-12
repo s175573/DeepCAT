@@ -72,7 +72,7 @@ DeepCAT will output two files, Cancer_score_Control.txt and Cancer_score_Cancer.
 where first column contains name of the input file, second column is mean cancer score for all sequences in corresponding input file.<br />
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-Let’s make boxplots with cancer score for early-stage breast cancer patients (sample1 and sample2) and healthy donors (sample3 and sample4).
+Let’s make boxplots with cancer score for early-stage breast cancer patients (16 samples) and healthy donors (30 samples).
 
 <p align="center">
   <img src="Figures/Cancer_score.png" width="450" height="450">
