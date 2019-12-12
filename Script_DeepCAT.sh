@@ -21,11 +21,7 @@ if [ ${args[0]} == '-r' ]; then
      exit 1
   fi   
 elif [ ${args[0]} == '-t' ]; then
-    echo "The files in ${args[1]} will be processed"
-    if [ ! -d $var2 ]; then
-      mkdir $var2
-    fi
-    python iSMARTm.py -d ${args[1]} -o $var2
+    var2=${args[1]}
 fi  
 python DeepCAT.py $var2  $var3
 
