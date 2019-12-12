@@ -55,11 +55,17 @@ DeepCAT will output two files, Cancer_score_Control.txt and Cancer_score_Cancer.
 
 
 ```bash
-  $ cat Cancer_score.txt
-  sample1.tsv_ClusteredCDR3s_7.5.txt	0.31860474
-  sample2.tsv_ClusteredCDR3s_7.5.txt	0.22043602
-  sample3.tsv_ClusteredCDR3s_7.5.txt	0.17322193
-  sample4.tsv_ClusteredCDR3s_7.5.txt	0.17117158
+  $ head Cancer_score_Control.txt
+  TestReal-HIP09051.tsv_ClusteredCDR3s_7.5.txt	0.22574785
+  TestReal-HIP09559.tsv_ClusteredCDR3s_7.5.txt	0.16407683
+  TestReal-HIP09364.tsv_ClusteredCDR3s_7.5.txt	0.21816333
+  TestReal-HIP09062.tsv_ClusteredCDR3s_7.5.txt	0.17059885
+  TestReal-HIP09190.tsv_ClusteredCDR3s_7.5.txt	0.17043449
+  TestReal-HIP09022.tsv_ClusteredCDR3s_7.5.txt	0.16097252
+  TestReal-HIP09029.tsv_ClusteredCDR3s_7.5.txt	0.172395
+  TestReal-HIP09159.tsv_ClusteredCDR3s_7.5.txt	0.17491624
+  TestReal-HIP09775.tsv_ClusteredCDR3s_7.5.txt	0.21496484
+  TestReal-HIP10377.tsv_ClusteredCDR3s_7.5.txt	0.19861585
 ```
 
 &nbsp; &nbsp; &nbsp;&nbsp; 
