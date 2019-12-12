@@ -104,7 +104,7 @@ Run the following command in Terminal:
 ```python
 python
 >>> from DeepCAT import *
->>> batchTrain(ftumor='TumorCDR3.txt',n=10, feval_tumor='TumorCDR3_test.txt', feval_normal='NormalCDR3_test.txt', STEPs=20000, rate=0.33, fnormal='NormalCDR3.txt')
+>>> batchTrain(ftumor='TrainingData/TumorCDR3.txt',n=10, feval_tumor='TrainingData/TumorCDR3_test.txt', feval_normal='TrainingData/NormalCDR3_test.txt', STEPs=20000, rate=0.33, fnormal='TrainingData/NormalCDR3.txt')
 ```
 This function performs n (=10 here) times 3-fold cross-validation by subsampling 1-rate (67%) of the data for training, and the remaining 33% for validation. The number of training steps in each run is equal 20000.
 
