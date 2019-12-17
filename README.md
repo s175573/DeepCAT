@@ -109,5 +109,5 @@ python
 ```
 This function performs n (=10 here) times 3-fold cross-validation by subsampling 1-rate (67%) of the data for training, and the remaining 33% for validation. The number of training steps in each run is equal 20000.
 
-It will create a subdirectory under the current path, /tmp/, which stores all the checkpoint folders and ROC curves for each run.
+It will create a subdirectory under the current path, /tmp/, which stores all the checkpoint folders with trained models for each run.
 The ROC values for each CDR3 length will be shown in Terminal.
