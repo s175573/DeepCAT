@@ -75,8 +75,7 @@ where first column contains name of the input file, second column is mean cancer
 Let’s make boxplots with cancer score for early-stage breast cancer patients (16 samples) and healthy donors (30 samples).
 
 <p float="left">
-  <img src="Figures/Cancer_score.png" width="400" height="400"/>
-  <img src="Figures/ROC_Cancer_score.png" width="400" height="400"/> 
+  <img src="Figures/Figure_Cancer_score.png" width="930" height="450"/>
 </p>
 
 
