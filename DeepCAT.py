@@ -1,7 +1,7 @@
 #! usr/bin/python
 ## CNN model for tumor-specific CDR3 sequence prediction
 
-import sys,os,re,csv
+import sys,os,re,csv,pathlib
 import tensorflow as tf
 import numpy as np
 import matplotlib as mpl
@@ -397,7 +397,7 @@ def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefi
     PredictClass={}
     PredictLabels={}
     AUCDict={}
-    for LL in xrange(12,17):
+    for LL in range(12,17):
         CDR3_classifier=tf.estimator.Estimator(model_fn=ModelDict[LL],model_dir=dir_prefix+'/CDR3_classifier_PCA_LL'+str(LL)+'_L2_k2f8d10_'+ID+'/')
         if EvalLabels is None:
             eval_input_fn=tf.estimator.inputs.numpy_input_fn(
@@ -421,7 +421,7 @@ def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefi
             for x in eval_results:
                 xx.append(x['probabilities'][1])
             YY=EvalLabels[LL]
-            xy=zip(xx,YY)
+            xy=list(zip(xx,YY))
             xy.sort()
             xs=[x for x,y in xy]
             ys=[y for x,y in xy]
@@ -438,7 +438,7 @@ def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefi
         'size'   : 22}
         mpl.rc('font', **font)
         hhList=[]
-        for LL in xrange(12,17):
+        for LL in range(12,17):
             xx=PredictClass[LL]
             yy=PredictLabels[LL]
             ycurve=roc_curve(yy,xx)
@@ -453,9 +453,10 @@ def PredictEvaluation(EvalFeature,EvalLabels=None,makePlot=False,ID='',dir_prefi
         plt.savefig(dir_prefix+'/ROC-'+ID+'.png',dpi=300)
     return PredictClass, PredictLabels, AUCDict
 
-def batchTrain(ftumor, fnormal,feval_tumor,feval_normal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'/tmp/'):
+def batchTrain(ftumor, fnormal,feval_tumor,feval_normal, rate=0.33,n=100,STEPs=10000,dir_prefix=curPath+'/tmp'):
     ## rate: cross validation ratio: 0.2 means 80% samples will be used for training
     ## n: number of subsamplings
+    pathlib.Path(dir_prefix).mkdir(parents=True, exist_ok=True) 
     tumorCDR3s=[]
     g=open(ftumor)
     for ll in g.readlines():
