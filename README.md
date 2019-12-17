@@ -72,7 +72,7 @@ DeepCAT will output two files, Cancer_score_Control.txt and Cancer_score_Cancer.
 where first column contains name of the input file, second column is mean cancer score for all sequences in corresponding input file.<br />
 
 &nbsp; &nbsp; &nbsp;&nbsp;
-Let’s make boxplots and with cancer scores and ROC curve for early-stage breast cancer patients (16 samples) and healthy donors (30 samples).
+Let’s make boxplots with cancer scores and ROC curve for early-stage breast cancer patients (16 samples) and healthy donors (30 samples).
 
 <p float="left">
   <img src="Figures/Figure_Cancer_score.png" width="930" height="450"/>
