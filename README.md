@@ -111,3 +111,16 @@ This function performs n (=10 here) times 3-fold cross-validation by subsampling
 
 It will create a subdirectory under the current path, /tmp/, which stores all the checkpoint folders with trained models for each run.
 The ROC values for each CDR3 length will be shown in Terminal.
+
+### Docker image for DeepCAT  
+The Docker image can be downloaded at https://hub.docker.com/r/deepcat/cancer_associated_tcr
+
+To save image, type in Terminal:
+```bash
+docker save deepcat/cancer_associated_tcr > deep_cat.tar
+docker load --input deep_cat.tar
+```
+To run docker image:
+```bash
+docker run -v $(pwd)/Results:/Results deepcat/cancer_associated_tcr:1
+```
