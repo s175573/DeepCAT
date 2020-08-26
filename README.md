@@ -114,6 +114,9 @@ The ROC values for each CDR3 length will be shown in Terminal.
 
 ### Docker image for DeepCAT  
 The Docker image can be downloaded at https://hub.docker.com/r/deepcat/cancer_associated_tcr
+```bash
+docker pull deepcat/cancer_associated_tcr:1
+```
 
 To save image, type in Terminal:
 ```bash
