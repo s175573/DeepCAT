@@ -27,7 +27,7 @@ DeepCAT is a computational method based on convolutional neural network to exclu
  3. Running the DeepCAT requires python3, biopython, tensorflow version 1.4 and matplotlib packages to be installed. If they are not installed on your machine, please run the command:
  
 ```bash
-  pip install python3 biopython tensorflow==1.14 matplotlib 
+  pip install python3 biopython tensorflow==1.14 matplotlib pycairo scikit-learn
 ```
 
  4. Now we are ready to run DeepCAT to perform cancer score prediction  
