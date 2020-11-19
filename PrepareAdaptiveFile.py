@@ -34,7 +34,7 @@ for ff in ffs:
               if (row[1][0]=='C') and (row[1][-1]=='F'):
                   ddnew.append(row)
     ddnew=np.array(ddnew)      
-    sorted_array = ddnew[ddnew[:,3].argsort()]   
+    sorted_array = ddnew[ddnew[:,3].astype(float).argsort()]   
     reverse_array = sorted_array[::-1]
     if len(reverse_array)>thr:
        col1=reverse_array[0:thr,1]
@@ -44,7 +44,12 @@ for ff in ffs:
        col1=reverse_array[:,1]
        col2=reverse_array[:,5]
        col3=reverse_array[:,3]
-    c=zip(col1,col2,col3)         
+    c=zip(col1,col2,col3)
+    first_row='amino_acid	v_gene	frequency'
+    f=open(newff, 'w')
+    f.write(first_row)
+    f.write('\n')
+    f.close()
     with open(newff, 'w') as f:
        writer = csv.writer(f, delimiter='\t')
        writer.writerows(c)
